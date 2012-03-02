@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+require_once dirname(__DIR__) . '/library/Lagged/RedisMon.php';
+require_once dirname(__DIR__) . '/library/vendor/Rediska/library/Rediska/Autoloader.php';
+
+use \Lagged\RedisMon as RedisMon;
+
+\Rediska_Autoloader::register();
+
+$config = new \stdClass;
+$rediska = new \Rediska();
+
+$monitor = new RedisMon($config);
