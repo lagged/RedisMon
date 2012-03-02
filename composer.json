@@ -1,0 +1,43 @@
+{
+    "name": "lagged/RedisMon",
+    "description": "A monitor for Redis' vitals",
+    "keywords": ["statsd", "monitoring", "redis", "librato"],
+    "homepage": "http://github.com/lagged/RedisMon",
+    "type": "application",
+    "license": "New BSD License",
+    "config": {
+        "vendor-dir": "library/vendor"
+    },
+    "authors": [
+        {
+            "name": "Till Klampaeckel",
+            "email": "till@php.net",
+            "homepage": "http://till.klampaeckel.de/blog/"
+        }
+    ],
+    "repositories": [
+        {
+            "packagist": false
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "Rediska",
+                "version": "0.5.6",
+                "source": {
+                    "url": "git://github.com/Shumkov/Rediska.git",
+                    "type": "git",
+                    "reference": "fd1a56dde919f0bda4c8c10f81092723c133e905"
+                }
+            }
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "Rediska": "0.5.6"
+    },
+    "autoload": {
+        "psr-0": { "RedisMon": "library/" }
+    },
+    "bin": ["bin/redis-mon"]
+}
