@@ -5,9 +5,6 @@
     "homepage": "http://github.com/lagged/RedisMon",
     "type": "application",
     "license": "New BSD License",
-    "config": {
-        "vendor-dir": "library/vendor"
-    },
     "authors": [
         {
             "name": "Till Klampaeckel",
@@ -30,14 +27,31 @@
                     "reference": "fd1a56dde919f0bda4c8c10f81092723c133e905"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "Services_Librato",
+                "version": "dev-master",
+                "source": {
+                    "url": "git://github.com/till/Services_Librato.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "require": {
         "php": ">=5.3.0",
-        "Rediska": "0.5.6"
+        "Rediska": "0.5.6",
+        "Services_Librato": "*"
     },
     "autoload": {
-        "psr-0": { "RedisMon": "library/" }
+        "psr-0": {
+            "Lagged\\RedisMon": "library/",
+            "Rediska": "vendor/Rediska/library/",
+            "Services\\Librato": "vendor/Services_Librato/library/"
+        }
     },
     "bin": ["bin/redis-mon"]
 }
