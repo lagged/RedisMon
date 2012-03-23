@@ -1,14 +1,26 @@
 #!/usr/bin/env php
 <?php
+$autoloader = dirname(__DIR__) . '/vendor/.composer/autoload.php';
 
-require_once dirname(__DIR__) . '/library/Lagged/RedisMon.php';
-require_once dirname(__DIR__) . '/library/vendor/Rediska/library/Rediska/Autoloader.php';
+if (!file_exists($autoloader)) {
+    echo "Please run 'php composer.phar install'." . PHP_EOL;
+    exit(1);
+}
+require_once $autoloader;
 
 use \Lagged\RedisMon as RedisMon;
 
-\Rediska_Autoloader::register();
+$options = array(
+    'name'         => 'RedisMon',
+    'addToManager' => false,
+    'servers' => array(
+        array('host'     => '127.0.0.1',
+              'port'     => 6379,
+        ),
+    ),
+);
 
 $config = new \stdClass;
-$rediska = new \Rediska();
+$rediska = new \Rediska($options);
 
-$monitor = new RedisMon($config);
+$monitor = new RedisMon($config, $rediska);
