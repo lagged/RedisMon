@@ -1,6 +1,8 @@
 <?php
 namespace Lagged;
 
+use \Rediska;
+
 class RedisMon
 {
     /**
