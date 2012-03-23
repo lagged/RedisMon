@@ -3,6 +3,9 @@ namespace Lagged;
 
 use \Rediska;
 
+/**
+ * @author Till Klampaeckel <till@php.net>
+ */
 class RedisMon
 {
     /**
