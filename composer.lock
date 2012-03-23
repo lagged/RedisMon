@@ -1,9 +1,15 @@
 {
-    "hash": "9b0e66aa451b3c159ab3c3955089c253",
+    "hash": "af86a8c8bfea3bbe167ad84757f25e73",
     "packages": [
         {
             "package": "Rediska",
             "version": "0.5.6"
+        },
+        {
+            "package": "Services_Librato",
+            "version": "dev-master",
+            "source-reference": "master"
         }
-    ]
+    ],
+    "aliases": []
 }
