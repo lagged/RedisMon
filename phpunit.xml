@@ -1,0 +1,5 @@
+<phpunit bootstrap="./tests/bootstrap.php" colors="true">
+    <testsuite name="ConfigTest">
+        <directory>./tests/Lagged/RedisMon/Test/</directory>
+    </testsuite>
+</phpunit>
