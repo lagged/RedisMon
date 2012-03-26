@@ -71,6 +71,16 @@ class RedisMon
     /**
      * @return array
      */
+    public function getStats()
+    {
+        $info = new \Rediska_Command_Info($this->getRediska(), 'INFO');
+        if (true !== $info->write()) {
+            throw new \RuntimeException("Error issueing command.");
+        }
+        $stats = $info->read();
+        return $stats;
+    }
+
     public function stats()
     {
         $info = $this->rediska->info();
