@@ -45,4 +45,9 @@ foreach ($stats as $server => $stats) {
 }
 
 $librato = new Metrics($libratoConf->email, $libratoConf->apiKey);
-$librato->update($metrics);
+$status  = $librato->update($metrics);
+
+if ($status === true) {
+    exit(0);
+}
+exit(1);
