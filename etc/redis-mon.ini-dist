@@ -2,7 +2,9 @@
 
 [production]
 
+; two servers - not particulary useful, but good for testing ;)
 servers[] = 127.0.0.1:6379
+servers[] = 0.0.0.0:6379
 
 stats[] = uptime_in_seconds
 stats[] = connected_clients
