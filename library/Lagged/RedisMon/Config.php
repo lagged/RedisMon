@@ -48,6 +48,14 @@ class Config extends \IniParser
     }
 
     /**
+     * @return \ArrayObject
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
      * Get the current environment's configuration.
      *
      * @return ArrayObject
