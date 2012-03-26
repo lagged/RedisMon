@@ -1,0 +1,15 @@
+; different environments to gather different metrics
+
+[production]
+
+servers[] = 127.0.0.1:6379
+
+stats[] = uptime_in_seconds
+stats[] = connected_clients
+stats[] = used_memory
+stats[] = total_connections_received
+stats[] = total_commands_processed
+
+rediska.name = "RedisMon" ; feel free to customize this
+
+[testing : production]
