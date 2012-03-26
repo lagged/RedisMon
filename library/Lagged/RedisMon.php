@@ -34,7 +34,42 @@ class RedisMon
     }
 
     /**
+     * Setup an instance of Rediska if none exists.
      *
+     * Configuration comes from the configuration file in etc/.
+     *
+     * @return Rediska
+     */
+    protected function getRediska()
+    {
+        if ($this->rediska instanceof Rediska) {
+            return $this->rediska;
+        }
+
+        $config = $this->config->getEnvConfig();
+
+        if (!isset($config->servers) || empty($config->servers)) {
+            throw new \LogicException("No redis-server(s) configured.");
+        }
+
+        $servers = array();
+        foreach ($config->servers as $server) {
+            list($host, $port) = explode(':', $server);
+            $servers[]         = array('host' => $host, 'port' => $port);
+        }
+
+        $options = array(
+            'name'         => $config->rediska->name,
+            'addToManager' => true,
+            'servers'      => $servers,
+        );
+
+        $this->rediska = new Rediska($options);
+        return $this->rediska;
+    }
+
+    /**
+     * @return array
      */
     public function stats()
     {
