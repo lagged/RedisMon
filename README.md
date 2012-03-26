@@ -18,6 +18,15 @@ RedisMon collects stats from one or multiple redis-servers. The statistics are p
 
 Note: The period in `etc/redis-mon.ini` should match the interval in your crontab.
 
+## Testing
+
+This is an early Alpha release, to test RedisMon, run `./bin/redis-mon` (after you installed all dependencies with composer).
+
+Requirements:
+
+ * PHP 5.3.3
+ * cURL (with ssl, etc.)
+
 ## TODO
 
  * Support statsd/graphite.
