@@ -69,7 +69,12 @@ class RedisMon
     }
 
     /**
+     * This method runs the query against redis-server (via Rediska).
+     *
+     * The result is always an array where the key is 'server:port'.
+     *
      * @return array
+     * @throws \RuntimeException
      */
     public function getStats()
     {
@@ -78,7 +83,16 @@ class RedisMon
             throw new \RuntimeException("Error issueing command.");
         }
         $stats = $info->read();
-        return $stats;
+
+        $config = $this->config->getEnvConfig();
+        if (count($config->servers) == 1) {
+            $server              = $config->servers[0];
+            $redisStats[$server] = $stats;
+        } else {
+            $redisStats = $stats;
+        }
+
+        return $redisStats;
     }
 
     public function stats()
