@@ -58,7 +58,7 @@ class Config extends \IniParser
     /**
      * Get the current environment's configuration.
      *
-     * @return ArrayObject
+     * @return \ArrayObject
      */
     public function getEnvConfig()
     {
