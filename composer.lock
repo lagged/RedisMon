@@ -1,6 +1,11 @@
 {
-    "hash": "af86a8c8bfea3bbe167ad84757f25e73",
+    "hash": "e40d456c11c861b1f0cc0e4d1c9bf1ac",
     "packages": [
+        {
+            "package": "IniParser",
+            "version": "dev-master",
+            "source-reference": "master"
+        },
         {
             "package": "Rediska",
             "version": "0.5.6"
