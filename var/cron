@@ -1,0 +1,2 @@
+#MAILTO=you@example.org
+*/2 * * * * /usr/local/bin/php ~/RedisMon/bin/redis-mon > ~/RedisMon/var/log/redis-mon.log 2>&1
