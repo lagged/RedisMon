@@ -14,4 +14,8 @@ stats[] = total_commands_processed
 
 rediska.name = "RedisMon" ; feel free to customize this
 
+librato.email  = 'email@you.signed.up.with'
+librato.apiKey = 'guess what?'
+librato.period = 'flush interval, should match your cronjob'
+
 [testing : production]
