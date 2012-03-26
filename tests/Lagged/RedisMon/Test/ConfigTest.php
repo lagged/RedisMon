@@ -9,14 +9,15 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testLogicException()
     {
-        new Config('/does/not/exist/redis-mon.ini', 'foo');
+        $config = new Config('/does/not/exist/redis-mon.ini', 'foo');
     }
 
-    /**
-     * @expectedException \LogicException
-     */
-    public function testSection()
+    public function testGetEnvConfig()
     {
-        new Config(BASE_DIR . '/etc/redis-mon.ini', time()); // will never exist
+        $config = new Config(BASE_DIR . '/etc/redis-mon.ini');
+        $config->setEnvironment('testing')->parse();
+
+        $envConfig = $config->getEnvConfig();
+        $this->assertInstanceOf('ArrayObject', $envConfig);
     }
 }
