@@ -1,6 +1,7 @@
 <?php
 namespace Lagged;
 
+use \Lagged\RedisMon\Config;
 use \Rediska;
 
 /**
@@ -9,7 +10,7 @@ use \Rediska;
 class RedisMon
 {
     /**
-     * @var stdClass $config
+     * @var Config $config
      */
     protected $config;
 
@@ -26,7 +27,7 @@ class RedisMon
      *
      * @return $this
      */
-    public function __construct(\stdClass $config, Rediska $rediska)
+    public function __construct(Config $config, Rediska $rediska = null)
     {
         $this->config  = $config;
         $this->rediska = $rediska;
