@@ -9,6 +9,8 @@ require_once $autoloader;
 
 use \Lagged\RedisMon\Config;
 use \Lagged\RedisMon;
+use \Services\Librato\Metrics;
+use \Services\Librato\Metrics\Metric;
 
 /**
  * @desc Include -dist file if no 'local' configuration exists.
@@ -22,4 +24,25 @@ $config = new Config($configFile);
 $config->setEnvironment('production')->parse();
 
 $monitor = new RedisMon($config);
-var_dump($monitor->stats());
+$stats   = $monitor->stats();
+
+$libratoConf = $config->getEnvConfig()->librato;
+
+$metrics = array();
+foreach ($stats as $server => $stats) {
+    foreach ($stats as $stat => $value) {
+
+        list($redis, $role, $collectedMetric) = explode('.', $stat);
+
+        $metric              = new Metric($stat);
+        $metric->value       = $value;
+        $metric->source      = $server;
+        $metric->period      = $libratoConf->period;
+        $metric->description = sprintf('redis-server (%s): %s', $role, $collectedMetric);
+
+        $metrics[] = $metric;
+    }
+}
+
+$librato = new Metrics($libratoConf->email, $libratoConf->apiKey);
+$librato->update($metrics);
