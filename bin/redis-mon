@@ -8,7 +8,8 @@ if (!file_exists($autoloader)) {
 }
 require_once $autoloader;
 
-use \Lagged\RedisMon as RedisMon;
+use \Lagged\RedisMon\Config;
+use \Lagged\RedisMon;
 
 $options = array(
     'name'         => 'RedisMon',
@@ -20,7 +21,8 @@ $options = array(
     ),
 );
 
-$config = new \stdClass;
-$rediska = new \Rediska($options);
+$config = new Config($configFile);
+$config->setEnvironment('production')->parse();
 
-$monitor = new RedisMon($config, $rediska);
+$monitor = new RedisMon($config);
+var_dump($monitor->stats());
