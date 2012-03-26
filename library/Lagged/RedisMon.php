@@ -95,9 +95,46 @@ class RedisMon
         return $redisStats;
     }
 
+    /**
+     * Only return the stats requested.
+     *
+     * Stats are formatted the following way:
+     *
+     * redis.ROLE.metric = value
+     *
+     * The metrics are stacked in an array. The returned array's key is always the
+     * server the stats came from. This is pretty useful for 'source' in graphite/librato.
+     *
+     * @return array
+     */
     public function stats()
     {
-        $info = $this->rediska->info();
-        var_dump($info);
+        $stats  = $this->getStats();
+        $config = $this->config->getEnvConfig();
+
+        if (empty($config->stats)) {
+            throw new \LogicException("There are no stats for collection configured.");
+        }
+
+        $collect = array();
+
+        // gather multiple here
+        foreach ($stats as $server => $stat) {
+
+            if (!isset($collect[$server])) {
+                $collect[$server] = array();
+            }
+
+            $keep = array();
+
+            foreach ($config->stats as $toCollect) {
+                $prefix        = sprintf('redis.%s.%s', $stat['role'], $toCollect);
+                $keep[$prefix] = $stat[$toCollect];
+            }
+            $collect[$server] = $keep;
+            unset($keep);
+        }
+        unset($stats);
+        return $collect;
     }
 }
